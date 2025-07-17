@@ -4,6 +4,7 @@ import About from './pages/About';
 import Contact from './pages/Contact';
 import Confidentialite from './pages/Confidentialite';
 
+
 function App() {
   return (
     <Router>
