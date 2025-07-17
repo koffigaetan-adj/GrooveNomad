@@ -24,7 +24,8 @@ const continentCenters: Record<string, { lat: number; lng: number }> = {
   Europe: { lat: 54.5260, lng: 15.2551 },
   Asia: { lat: 34.0479, lng: 100.6197 },
   America: { lat: 37.0902, lng: -95.7129 },
-  Africa: { lat: 1.6508, lng: 17.6791 }
+  Africa: { lat: 1.6508, lng: 17.6791 },
+  Oceania: { lat: -30.0000, lng: 140.0000 }
 };
 
 const FestivalMapDynamic: React.FC = () => {
@@ -49,7 +50,7 @@ const FestivalMapDynamic: React.FC = () => {
   };
 
   useEffect(() => {
-    const enrichFestivals = async () => {
+    async function enrichFestivals() {
       const enriched = await Promise.all(
         rawFestivals.map(async (f) => {
           const coords = await geocodeWithGoogle(`${f.name}, ${f.city}, ${f.country}`);
@@ -57,7 +58,7 @@ const FestivalMapDynamic: React.FC = () => {
         })
       );
       setFestivals(enriched.filter(Boolean) as Festival[]);
-    };
+    }
     enrichFestivals();
   }, []);
 
@@ -141,6 +142,7 @@ const FestivalMapDynamic: React.FC = () => {
   ]
 }}
       >
+        
         <div className="absolute top-2 left-2 z-10 bg-white-900 border-2 border-white/30 backdrop-blur-sm rounded-full p-2 shadow text-sm">
           <select
             value={continent}
