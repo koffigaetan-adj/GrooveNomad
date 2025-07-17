@@ -1,18 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, } from 'react';
 import { Link } from 'react-router-dom';
 import { 
    Star, Users, Plane, ChevronRight,
   Sparkles, Globe, TrendingUp
 } from 'lucide-react';
 
-import FestivalCard from '../components/FestivalCard';
+/* import FestivalCard from '../components/FestivalCard'; */
 import ChatIA from '../components/ChatIA';
-import useLocalStorage from '../hooks/useLocalStorage';
-import useFestivalData from '../hooks/useFestivalData';
+/* import useLocalStorage from '../hooks/useLocalStorage';
+import useFestivalData from '../hooks/useFestivalData'; */
 import FestivalMapDynamic from '../components/FestivalMapDynamic';
 
 const HomePage: React.FC = () => {
-  const [, setCurrentSlide] = useState(0);
+  const [] = useState(0);
 
   type Language = 'fr' | 'en';
 
@@ -24,9 +24,9 @@ const HomePage: React.FC = () => {
   const [language, setLanguage] = useState<Language>(getInitialLanguage());
 
 
-  const [likedFestivals, setLikedFestivals] = useLocalStorage<string[]>('likedFestivals', []);
-  const [, setBookmarkedFestivals] = useLocalStorage<any[]>('bookmarkedFestivals', []);
-  const { festivals, loading } = useFestivalData();
+ /*  const [likedFestivals, setLikedFestivals] = useLocalStorage<string[]>('likedFestivals', []); */
+/*   const [, setBookmarkedFestivals] = useLocalStorage<any[]>('bookmarkedFestivals', []);
+  const { festivals } = useFestivalData(); */
 
  
 
@@ -34,8 +34,22 @@ const HomePage: React.FC = () => {
     nav: { about: string; contact: string };
     hero: { title: string; subtitle: string; cta: string; quote: string };
     destinations: { title: string; subtitle: string };
-    howItWorks: { title: string; step1: string; step2: string; step3: string };
-    testimonials: { title: string };
+    howItWorks: { title: string; step1: string; step2: string; step3: string; desStep1: string; desStep2: string; desStep3: string  };
+    /* testimonials: { name: string; age: number; festival: string; text: string; rating: number; image: string }[]; */
+    testimonials: {
+    title: string;
+    reviews: {
+      name: string;
+      age: number;
+      festival: string;
+      text: string;
+      rating: number;
+      image: string;
+    }[];
+  };
+    Mapdynamic: { title: string }; 
+    stats: { text1: string; text2: string; text3: string };
+    footer: { descipSite: string; reserve: string };
   }
 
     // Contenu pour chaque langue
@@ -45,23 +59,65 @@ const HomePage: React.FC = () => {
       nav: { about: "À propos", contact: "Contact" },
       hero: {
         title: "Your Next Trip Starts with a Beat",
-        subtitle: "GrooveNomad vous emmène aux quatre coins du monde pour découvrir la musique, la culture et l'aventure",
+        subtitle: "GrooveNomad t'emmène aux quatre coins du monde pour découvrir la musique, la culture et l'aventure",
         cta: "Commencer mon voyage",
         quote: "Je m'inspire"
       },
+      stats: {
+        text1: "festivals partenaires",
+        text2: "voyageurs satisfaits",
+        text3: "recommandations IA"
+      },
       destinations: {
         title: "Destinations Phares",
-        subtitle: "Découvrez les festivals les plus attendus de 2025"
+        subtitle: "Découvres les festivals les plus attendus de 2025"
       },
       howItWorks: {
         title: "Comment ça marche ?",
-        step1: "Partagez vos préférences",
-        step2: "Recevez des recommandations IA",
-        step3: "Réservez votre aventure"
+        step1: "Raconte-nous ton projet",
+        step2: "Reçois ta proposition personnalisée",
+        step3: "Tu valides, on s’occupe du reste",
+        desStep1: "Choisis ta destination, ton budget, tes dates et ton style. Notre assistant te pose quelques questions, puis s’occupe du reste.",
+        desStep2: "L’IA te construit un séjour sur-mesure : festival, transport, hébergement. Tu veux en voir plus ? On peut y ajouter des activités autour.",
+        desStep3: "Réservations, confirmations, suivi : tout est prêt. Ton seul job ? Profiter de l’ambiance !" 
       },
       testimonials: {
-        title: "Ils ont vécu l'expérience GrooveNomad"
-      }
+      title: "Ils ont vécu l'expérience GrooveNomad",
+      reviews: [
+        {
+          name: "Sarah M.",
+          age: 24,
+          festival: "Tomorrowland 2024",
+          text: "Une expérience magique ! GrooveNomad a organisé chaque détail parfaitement.",
+          rating: 5,
+          image: "https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=200"
+        },
+        {
+          name: "Alex R.",
+          age: 28,
+          festival: "Coachella 2024",
+          text: "L'IA a trouvé exactement ce que je cherchais. Voyage incroyable !",
+          rating: 5,
+          image: "https://images.pexels.com/photos/1681010/pexels-photo-1681010.jpeg?auto=compress&cs=tinysrgb&w=200"
+        },
+        {
+          name: "Emma L.",
+          age: 26,
+          festival: "Burning Man 2024",
+          text: "Service personnalisé exceptionnel. Je recommande les yeux fermés !",
+          rating: 5,
+          image: "https://images.pexels.com/photos/1130626/pexels-photo-1130626.jpeg?auto=compress&cs=tinysrgb&w=200"
+        }
+      ]
+    },
+
+    Mapdynamic : {
+        title: "Explores les festivals du monde entier"
+    },
+    footer: {
+      descipSite: "GrooveNomad est votre agence de voyage spécialisée dans les festivals de musique du monde entier.",
+      reserve: "Tous droits réservés © 2025 GrooveNomad"
+     }
     },
     en: {
       nav: { about: "About", contact: "Contact" },
@@ -69,64 +125,81 @@ const HomePage: React.FC = () => {
         title: "Your Next Trip Starts with a Beat",
         subtitle: "GrooveNomad takes you around the world to discover music, culture and adventure",
         cta: "Start my journey",
-        quote: "I inspire myself"
+        quote: "I get inspired"
+      },
+      stats: {
+        text1: "partenership festivals",
+        text2: "satisfied travelers",
+        text3: "AI recommendations"
       },
       destinations: {
         title: "Top Destinations",
         subtitle: "Discover the most anticipated festivals of 2025"
       },
       howItWorks: {
-        title: "How it works?",
-        step1: "Share your preferences",
-        step2: "Get AI recommendations",
-        step3: "Book your adventure"
+        title: "How does it work?",
+        step1: "Tell us about your project",
+        step2: "Receive your personalized proposal",
+        step3: "You approve it, we handle the rest",
+        desStep1: "Choose your destination, budget, dates, and style. Our assistant asks you a few questions, then takes care of everything.",
+        desStep2: "The AI builds a tailor-made trip for you: festival, transport, accommodation. Want to see more? We can add nearby activities too.",
+        desStep3: "Bookings, confirmations, follow-ups: everything's ready. Your only job? Enjoy the vibe!"
       },
       testimonials: {
-        title: "They lived the GrooveNomad experience"
-      }
+      title: "They lived the GrooveNomad experience",
+      reviews: [
+        {
+          name: "Sarah M.",
+          age: 24,
+          festival: "Tomorrowland 2024",
+          text: "A magical experience! GrooveNomad organized every detail perfectly.",
+          rating: 5,
+          image: "https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=200"
+        },
+        {
+          name: "Alex R.",
+          age: 28,
+          festival: "Coachella 2024",
+          text: "The AI found exactly what I was looking for. Incredible trip!",
+          rating: 5,
+          image: "https://images.pexels.com/photos/1681010/pexels-photo-1681010.jpeg?auto=compress&cs=tinysrgb&w=200"
+        },
+        {
+          name: "Emma L.",
+          age: 26,
+          festival: "Burning Man 2024",
+          text: "Exceptional personalized service. I recommend with my eyes closed!",
+          rating: 5,
+          image: "https://images.pexels.com/photos/1130626/pexels-photo-1130626.jpeg?auto=compress&cs=tinysrgb&w=200"
+        }
+      ]
+    },
+      Mapdynamic : {
+        title: "Explore festivals around the world"
+      },
+    footer: {
+      descipSite: "GrooveNomad is your travel agency specialized in music festivals around the world.",
+      reserve: "All rights reserved © 2025 GrooveNomad"
+    }
     }
   };
 
 
   const t = content[language];
+  
+  const testimonials = t.testimonials.reviews;
 
-  const testimonials = [
-    {
-      name: "Sarah M.",
-      age: 24,
-      festival: "Tomorrowland 2024",
-      text: "Une expérience magique ! GrooveNomad a organisé chaque détail parfaitement.",
-      rating: 5,
-      image: "https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=200"
-    },
-    {
-      name: "Alex R.",
-      age: 28,
-      festival: "Coachella 2024",
-      text: "L'IA a trouvé exactement ce que je cherchais. Voyage incroyable !",
-      rating: 5,
-      image: "https://images.pexels.com/photos/1681010/pexels-photo-1681010.jpeg?auto=compress&cs=tinysrgb&w=200"
-    },
-    {
-      name: "Emma L.",
-      age: 26,
-      festival: "Burning Man 2024",
-      text: "Service personnalisé exceptionnel. Je recommande les yeux fermés !",
-      rating: 5,
-      image: "https://images.pexels.com/photos/1130626/pexels-photo-1130626.jpeg?auto=compress&cs=tinysrgb&w=200"
-    }
-  ];
 
-  useEffect(() => {
+/*   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentSlide((prev: number) => (prev + 1) % festivals.length);
     }, 4000);
     return () => clearInterval(interval);
-  }, [festivals.length]);
+  }, [festivals.length]); */
 
 
 
-  const handleLikeFestival = (festivalId: string) => {
+ /*  const handleLikeFestival = (festivalId: string) => {
     setLikedFestivals(prev => prev.includes(festivalId) ? prev.filter(id => id !== festivalId) : [...prev, festivalId]);
   };
 
@@ -137,10 +210,10 @@ const HomePage: React.FC = () => {
     });
     alert(`✅ ${festival.name} ajouté à vos favoris !`);
   };
-
+ */
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 text-white overflow-hidden">
-      {/* Tu peux réintégrer ici ton header, Hero, sections, ChatIA, footer, etc. */}
+      
        {/* Header */}
      <header className="fixed top-0 left-0 right-0 z-50 bg-black/20 backdrop-blur-md border-b border-white/10">
   <div className="container mx-auto px-6 py-4">
@@ -243,15 +316,15 @@ const HomePage: React.FC = () => {
       <div className="grid grid-cols-3 gap-8 mt-16 max-w-2xl mx-auto">
         <div className="text-center">
           <div className="text-3xl font-bold text-orange-400 mb-2">500+</div>
-          <div className="text-gray-300">Festivals partenaires</div>
+          <div className="text-gray-300">{t.stats.text1}</div>
         </div>
         <div className="text-center">
           <div className="text-3xl font-bold text-pink-400 mb-2">50K+</div>
-          <div className="text-gray-300">Voyageurs satisfaits</div>
+          <div className="text-gray-300">{t.stats.text2}</div>
         </div>
         <div className="text-center">
           <div className="text-3xl font-bold text-purple-400 mb-2">95%</div>
-          <div className="text-gray-300">Recommandations IA</div>
+          <div className="text-gray-300">{t.stats.text3}</div>
         </div>
       </div>
     </div>
@@ -272,23 +345,30 @@ const HomePage: React.FC = () => {
 
       {/* ChatIA */}
      <section className="pt-[120px] pb-20 bg-gradient-to-r from-purple-800/50 to-blue-800/50 backdrop-blur-sm scroll-mt-[120px]">
-  <div className="container mx-auto px-6">
-    <div  className="max-w-4xl mx-auto">
-<ChatIA />
-    </div>
-  </div>
-</section>
+        <div className="container mx-auto px-6">
+          <div  className="max-w-4xl mx-auto">
+          <ChatIA />
+          </div>
+        </div>
+      </section>
 
-    <section className="pt-[120px] pb-20 bg-gradient-to-r from-purple-800/50 to-blue-800/50 backdrop-blur-sm scroll-mt-[120px]">
-  <div className="container mx-auto px-6">
-    <div className="max-w-6xl mx-auto">
-      <FestivalMapDynamic />
-    </div>
-  </div>
-</section>
+
+      {/* MapDynamic */}
+      <section className="py-20" id="destinations">
+        <div className="container mx-auto px-6">
+          <h2 className="text-4xl font-bold text-center mb-12 bg-gradient-to-r from-orange-400 to-pink-400 bg-clip-text text-transparent">
+            {t.Mapdynamic.title}
+          </h2>
+          <div className="container mx-auto px-6">
+            <div className="max-w-6xl mx-auto">
+              <FestivalMapDynamic />
+            </div>
+          </div>
+        </div>  
+      </section>
 
       {/* Featured Destinations */}
-      <section className="py-20" id="destinations">
+      {/* <section className="py-20" id="destinations">
         <div className="container mx-auto px-6">
           <h2 className="text-4xl font-bold text-center mb-12 bg-gradient-to-r from-orange-400 to-pink-400 bg-clip-text text-transparent">
             {t.destinations.title}
@@ -321,7 +401,7 @@ const HomePage: React.FC = () => {
             </div>
           )}
         </div>
-      </section>
+      </section> */}
 
       {/* How It Works */}
       <section className="py-20 bg-gradient-to-r from-blue-800/50 to-purple-800/50 backdrop-blur-sm">
@@ -335,10 +415,9 @@ const HomePage: React.FC = () => {
               <div className="bg-gradient-to-r from-orange-500 to-pink-500 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
                 <Users className="h-10 w-10 text-white" />
               </div>
-              <h3 className="text-2xl font-bold mb-4">Raconte-nous ton projet</h3>
+              <h3 className="text-2xl font-bold mb-4">{t.howItWorks.step1}</h3>
               <p className="text-gray-300 text-lg">
-                Choisis ta destination, ton budget, tes dates et ton style.
-Notre assistant te pose quelques questions, puis s’occupe du reste.
+                {t.howItWorks.desStep1}
               </p>
             </div>
 
@@ -346,10 +425,9 @@ Notre assistant te pose quelques questions, puis s’occupe du reste.
               <div className="bg-gradient-to-r from-purple-500 to-blue-500 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
                 <Sparkles className="h-10 w-10 text-white" />
               </div>
-              <h3 className="text-2xl font-bold mb-4">Reçois ta proposition personnalisée</h3>
+              <h3 className="text-2xl font-bold mb-4">{t.howItWorks.step2}</h3>
               <p className="text-gray-300 text-lg">
-                L’IA te construit un séjour sur-mesure : festival, transport, hébergement.
-Tu veux en voir plus ? On peut y ajouter des activités autour.
+                {t.howItWorks.desStep2}
               </p>
             </div>
 
@@ -357,10 +435,9 @@ Tu veux en voir plus ? On peut y ajouter des activités autour.
               <div className="bg-gradient-to-r from-green-500 to-teal-500 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
                 <Plane className="h-10 w-10 text-white" />
               </div>
-              <h3 className="text-2xl font-bold mb-4">Tu valides, on s’occupe du reste</h3>
+              <h3 className="text-2xl font-bold mb-4">{t.howItWorks.step3}</h3>
               <p className="text-gray-300 text-lg">
-                Réservations, confirmations, suivi : tout est prêt.
-Ton seul job ? Profiter de l’ambiance !
+                {t.howItWorks.desStep3}
               </p>
             </div>
           </div>
@@ -376,28 +453,39 @@ Ton seul job ? Profiter de l’ambiance !
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {testimonials.map((testimonial, index) => (
-              <div key={index} className="bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20 hover:bg-white/15 transition-all transform hover:scale-105">
-                <div className="flex items-center space-x-4 mb-6">
-                  <img 
-                    src={testimonial.image} 
-                    alt={testimonial.name}
-                    className="w-16 h-16 rounded-full object-cover border-2 border-orange-400"
-                  />
-                  <div>
-                    <h4 className="font-bold text-lg">{testimonial.name}</h4>
-                    <p className="text-sm text-gray-300">{testimonial.age} ans • {testimonial.festival}</p>
-                  </div>
-                </div>
-                
-                <div className="flex items-center space-x-1 mb-4">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="h-5 w-5 fill-orange-400 text-orange-400" />
-                  ))}
-                </div>
-                
-                <p className="text-gray-300 text-lg italic">"{testimonial.text}"</p>
-              </div>
-            ))}
+  <div
+    key={index}
+    className="bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20 hover:bg-white/15 transition-all transform hover:scale-105"
+  >
+    <div className="flex items-center space-x-4 mb-6">
+      <img 
+        src={testimonial.image} 
+        alt={testimonial.name}
+        className="w-16 h-16 rounded-full object-cover border-2 border-orange-400"
+      />
+      <div>
+        <h4 className="font-bold text-lg text-white">{testimonial.name}</h4>
+        <p className="text-sm text-gray-300">
+          {testimonial.age} {language === 'fr' ? 'ans' : 'years old'} • {testimonial.festival}
+        </p>
+      </div>
+    </div>
+
+    <div className="flex items-center space-x-1 mb-4">
+      {testimonial.rating > 0 ? (
+        [...Array(testimonial.rating)].map((_, i) => (
+          <Star key={i} className="h-5 w-5 fill-orange-400 text-orange-400" />
+        ))
+      ) : (
+        <span className="text-sm text-gray-400 italic">
+          {language === 'fr' ? 'Pas encore noté' : 'Not rated yet'}
+        </span>
+      )}
+    </div>
+
+    <p className="text-gray-300 text-lg italic">"{testimonial.text}"</p>
+  </div>
+))}
           </div>
         </div>
       </section>
@@ -412,7 +500,7 @@ Ton seul job ? Profiter de l’ambiance !
                 <span className="text-xl font-bold">GrooveNomad</span>
               </div>
               <p className="text-gray-400 mb-4">
-                Votre agence de voyage spécialisée dans les festivals de musique du monde entier.
+                {t.footer.descipSite}
               </p>
               
             </div>
@@ -453,7 +541,7 @@ Ton seul job ? Profiter de l’ambiance !
           </div>
 
           <div className="border-t border-white/10 mt-8 pt-8 text-center text-gray-400">
-            <p>&copy; 2025 GrooveNomad. Tous droits réservés. Vivez la musique, explorez le monde.</p>
+            <p>&copy; {t.footer.reserve}</p>
           </div>
         </div>
       </footer>
