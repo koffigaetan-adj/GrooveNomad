@@ -1,9 +1,9 @@
 import React from 'react';
-import { Sun, Moon, Globe } from 'lucide-react';
+import { Globe } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 
 const ThemeToggle: React.FC = () => {
-  const { theme, language, toggleTheme, setLanguage } = useTheme();
+  const { language, setLanguage } = useTheme();
 
   const languages = [
     { code: 'fr', label: 'FR', flag: '🇫🇷' },

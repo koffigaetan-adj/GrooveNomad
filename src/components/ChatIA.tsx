@@ -37,7 +37,7 @@ const ChatIA = () => {
         ],
         i18n: {
           fr: {
-            title: 'Assistant virtuel',
+            title: 'GrooveNomad AI',
             subtitle: "Commence la discussion. On est là pour t'aider !",
             footer: '',
             getStarted: 'Nouvelle conversation',
@@ -96,7 +96,7 @@ const ChatIA = () => {
         <label htmlFor="consent">
           En cochant cette case, j’accepte la{' '}
           <a
-            href="/pages/Confidentialite"
+            href="/Confidentialite"
             target="_blank"
             rel="noopener noreferrer"
             className="underline text-orange-400 hover:text-orange-500"

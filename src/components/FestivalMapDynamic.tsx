@@ -168,8 +168,8 @@ const FestivalMapDynamic: React.FC = () => {
             icon={{
               path: google.maps.SymbolPath.CIRCLE,
               scale: 7,
-              fillColor: selected?.id === f.id ? '#f132a8ff' : '#fb923c',
-              fillOpacity: 1,
+              fillColor: selected?.id === f.id ? '#e77d14ff' : '#6433b2ff',
+              fillOpacity: 0.8,
               strokeWeight:0
             }}
           />
