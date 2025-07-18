@@ -1,18 +1,18 @@
-import React, { useState, } from 'react';
+import React, { useEffect, useState, } from 'react';
 import { Link } from 'react-router-dom';
 import { 
    Star, Users, Plane, ChevronRight,
   Sparkles, Globe, TrendingUp
 } from 'lucide-react';
 
-/* import FestivalCard from '../components/FestivalCard'; */
+import FestivalCard from '../components/FestivalCard';
 import ChatIA from '../components/ChatIA';
-/* import useLocalStorage from '../hooks/useLocalStorage';
-import useFestivalData from '../hooks/useFestivalData'; */
+import useLocalStorage from '../hooks/useLocalStorage';
+import useFestivalData from '../hooks/useFestivalData'; 
 import FestivalMapDynamic from '../components/FestivalMapDynamic';
 
 const HomePage: React.FC = () => {
-  const [] = useState(0);
+  const [currentSlide, setCurrentSlide] = useState(0);
 
   type Language = 'fr' | 'en';
 
@@ -24,9 +24,9 @@ const HomePage: React.FC = () => {
   const [language, setLanguage] = useState<Language>(getInitialLanguage());
 
 
- /*  const [likedFestivals, setLikedFestivals] = useLocalStorage<string[]>('likedFestivals', []); */
-/*   const [, setBookmarkedFestivals] = useLocalStorage<any[]>('bookmarkedFestivals', []);
-  const { festivals } = useFestivalData(); */
+  const [likedFestivals, setLikedFestivals] = useLocalStorage<string[]>('likedFestivals', []); 
+   const [, setBookmarkedFestivals] = useLocalStorage<any[]>('bookmarkedFestivals', []);
+  const { festivals, loading } = useFestivalData(); 
 
  
 
@@ -190,16 +190,16 @@ const HomePage: React.FC = () => {
   const testimonials = t.testimonials.reviews;
 
 
-/*   useEffect(() => {
+ useEffect(() => {
     const interval = setInterval(() => {
       setCurrentSlide((prev: number) => (prev + 1) % festivals.length);
     }, 4000);
     return () => clearInterval(interval);
-  }, [festivals.length]); */
+  }, [festivals.length]); 
 
 
 
- /*  const handleLikeFestival = (festivalId: string) => {
+  const handleLikeFestival = (festivalId: string) => {
     setLikedFestivals(prev => prev.includes(festivalId) ? prev.filter(id => id !== festivalId) : [...prev, festivalId]);
   };
 
@@ -210,7 +210,7 @@ const HomePage: React.FC = () => {
     });
     alert(`✅ ${festival.name} ajouté à vos favoris !`);
   };
- */
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 text-white overflow-hidden">
       
@@ -295,7 +295,7 @@ const HomePage: React.FC = () => {
       <div className="flex flex-col sm:flex-row gap-4 justify-center">
         <button
           onClick={() => {
-            document.querySelector('#form')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            document.querySelector('#form')?.scrollIntoView({  block: 'start' });
           }}
           className="bg-gradient-to-r from-orange-500 to-pink-500 px-8 py-4 rounded-full text-lg font-semibold hover:from-orange-600 hover:to-pink-600 transition-all transform hover:scale-105 flex items-center justify-center space-x-2"
         >
@@ -352,32 +352,15 @@ const HomePage: React.FC = () => {
         </div>
       </section>
 
-
-      {/* MapDynamic */}
-      <section className="py-20" id="destinations">
-        <div className="container mx-auto px-6">
-          <h2 className="text-4xl font-bold text-center mb-12 bg-gradient-to-r from-orange-400 to-pink-400 bg-clip-text text-transparent">
-            {t.Mapdynamic.title}
-          </h2>
-          <div className="container mx-auto px-6">
-            <div className="max-w-6xl mx-auto">
-              <FestivalMapDynamic />
-            </div>
-          </div>
-        </div>  
-      </section>
-
-      {/* Featured Destinations */}
-      {/* <section className="py-20" id="destinations">
+   {/* Featured Destinations */}
+       <section className="py-10 px-10" id="destinations">
         <div className="container mx-auto px-6">
           <h2 className="text-4xl font-bold text-center mb-12 bg-gradient-to-r from-orange-400 to-pink-400 bg-clip-text text-transparent">
             {t.destinations.title}
           </h2>
-          <p className="text-center text-gray-300 mb-12 text-lg">
-            {t.destinations.subtitle}
-          </p>
 
-          {loading ? (
+
+        {loading ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {[1, 2, 3, 4, 5, 6].map((i) => (
                 <div key={i} className="animate-pulse">
@@ -401,7 +384,23 @@ const HomePage: React.FC = () => {
             </div>
           )}
         </div>
-      </section> */}
+      </section>
+
+      {/* MapDynamic */}
+      <section className="py-20 bg-gradient-to-r from-blue-800/50 to-purple-800/50" id="destinations">
+        <div className="container mx-auto px-6">
+          <h2 className="text-4xl font-bold text-center mb-12 bg-gradient-to-r from-orange-400 to-pink-400 bg-clip-text text-transparent">
+            {t.Mapdynamic.title}
+          </h2>
+          <div className="container mx-auto px-6">
+            <div className="max-w-6xl mx-auto">
+              <FestivalMapDynamic />
+            </div>
+          </div>
+        </div>  
+      </section>
+
+    
 
       {/* How It Works */}
       <section className="py-20 bg-gradient-to-r from-blue-800/50 to-purple-800/50 backdrop-blur-sm">
@@ -506,13 +505,13 @@ const HomePage: React.FC = () => {
             </div>
 
             <div>
-              {/* <h4 className="font-semibold mb-4">Destinations</h4>
+               {/* <h4 className="font-semibold mb-4">Destinations</h4>
               <ul className="space-y-2 text-gray-400">
                 <li><a href="#" className="hover:text-orange-400 transition-colors">Europe</a></li>
                 <li><a href="#" className="hover:text-orange-400 transition-colors">Amérique du Nord</a></li>
                 <li><a href="#" className="hover:text-orange-400 transition-colors">Asie</a></li>
                 <li><a href="#" className="hover:text-orange-400 transition-colors">Océanie</a></li>
-              </ul> */}
+              </ul>  */}
             </div>
 
             <div>
@@ -522,7 +521,7 @@ const HomePage: React.FC = () => {
                 <li><a href="#" className="hover:text-orange-400 transition-colors">Hébergement</a></li>
                 <li><a href="#" className="hover:text-orange-400 transition-colors">Transport</a></li>
                 <li><a href="#" className="hover:text-orange-400 transition-colors">Activités locales</a></li>
-              </ul> */}
+              </ul> */} 
             </div>
 
             <div>
@@ -552,3 +551,4 @@ const HomePage: React.FC = () => {
 };
 
 export default HomePage;
+
