@@ -72,7 +72,8 @@ VITE_GOOGLE_MAPS_API_KEY=your_google_maps_api_key_here
 
 ```
 ---
-### 🤖 Chat IA (n8n)
+## Backend
+### 🤖 Agents IA (n8n)
 - Le composant ChatIA.tsx.
 - Intégré avec @n8n/chat pour simuler une conversation utilisateur.
 - Connexion à un scénario n8n qui guide les utilisateurs.
